@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You</title>
+    <!-- Premium Romantic Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@200;300;400;500&family=Playfair+Display:ital,wght=0,400;1,400;1,500&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #050304;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            font-family: 'Montserrat', sans-serif;
+            color: #ffffff;
+        }
+
+        /* PREMIUM LOFI ROMANTIC MOTION BACKGROUND ENGINE */
+        .bg-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .motion-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 2s cubic-bezier(0.25, 1, 0.5, 1);
+            animation: cinematicPan 36s ease-in-out infinite alternate;
+        }
+
+        .motion-bg.active {
+            opacity: 1;
+        }
+
+        /* TILE 1: Pure Aesthetic Deep Black with Golden Sparkle Matrix */
+        #bg-tile-1 {
+            background: #000000;
+        }
+        #bg-tile-1::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                radial-gradient(circle, rgba(232, 197, 128, 0.4) 1px, transparent 1px),
+                radial-gradient(circle, rgba(252, 234, 222, 0.3) 1.5px, transparent 1.5px);
+            background-size: 40px 40px, 60px 60px;
+            opacity: 0.8;
+            animation: starryShimmer 6s infinite alternate ease-in-out;
+        }
+
+        @keyframes starryShimmer {
+            0% { opacity: 0.5; transform: scale(1); }
+            100% { opacity: 0.9; transform: scale(1.02); }
+        }
+
+        @keyframes cinematicPan {
+            0% { transform: scale(1.01) translate(0px, 0px); }
+            50% { transform: scale(1.05) translate(-0.5%, 0.3%); }
+            100% { transform: scale(1.02) translate(0.5%, -0.3%); }
+        }
+
+        /* Deep Ambient Mood Overlays for High Contrast Visibility */
+        .ambient-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(5, 3, 4, 0.2), rgba(5, 3, 4, 0.75));
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* Fully Responsive Screen Layers */
+        .screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 8%;
+            cursor: pointer;
+            transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s ease;
+        }
+
+        /* STAGE 1: Minimalist Start with Edge-Glow Rose */
+        #screen-trigger {
+            z-index: 15;
+        }
+
+        .heart-btn {
+            font-size: clamp(2.5rem, 6vw, 3.5rem);
+            line-height: 1;
+            filter: drop-shadow(0 0 3px #e8c580) drop-shadow(0 0 10px rgba(232, 197, 128, 0.7)) drop-shadow(0 0 20px rgba(232, 197, 128, 0.4));
+            animation: pulse 3s infinite ease-in-out;
+        }
+
+        .trigger-text {
+            font-size: clamp(0.65rem, 2vw, 0.75rem);
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            margin-top: 25px;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 300;
+        }
+
+        /* STAGE 2: Mishthi Script Reveal */
+        #screen-text {
+            opacity: 0;
+            transform: translateY(10px);
+            pointer-events: none;
+        }
+
+        .hbd-title {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: clamp(1.6rem, 4vw, 2.4rem);
+            color: rgba(252, 234, 222, 0.85);
+            font-weight: 400;
+            margin-bottom: 5px;
+        }
+
+        .name-calligraphy {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(4.5rem, 12vw, 6.5rem);
+            color: #ffffff;
+            font-weight: 400;
+            text-shadow: 0 0 30px rgba(255,255,255,0.2), 0 4px 15px rgba(0,0,0,0.6);
+            line-height: 1.1;
+        }
+
+        /* STAGE 3: Self Love Statement */
+        #screen-photo {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .poetry-message {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: clamp(1.15rem, 3.2vw, 1.65rem);
+            color: rgba(252, 234, 222, 0.95);
+            line-height: 1.8;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+            margin-bottom: 25px;
+            font-weight: 400;
+        }
+
+        /* FIXED: Font modified to elegant cursive matching 'Mishthi' layout style */
+        .final-message {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(2.5rem, 6vw, 3.6rem);
+            color: #fceade;
+            text-shadow: 0 0 20px rgba(252, 234, 222, 0.4), 0 4px 10px rgba(0,0,0,0.5);
+            line-height: 1.2;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+
+        .tap-prompt {
+            font-size: clamp(0.55rem, 1.8vw, 0.7rem);
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.45);
+            margin-top: 40px;
+            font-weight: 400;
+        }
+
+        /* STAGE 4: Modern Vanshika Layout */
+        #screen-vanshika {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .warm-glow {
+            position: absolute;
+            width: clamp(280px, 65vw, 500px);
+            height: clamp(280px, 65vw, 500px);
+            background: radial-gradient(circle, rgba(232, 197, 128, 0.08) 0%, rgba(0,0,0,0) 70%);
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .art-composition {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(25px, 6vw, 55px);
+            margin-bottom: 25px;
+            z-index: 5;
+        }
+
+        .aesthetic-cake {
+            width: clamp(55px, 9vw, 70px);
+            height: clamp(55px, 9vw, 70px);
+            fill: none;
+            stroke: #f5ebe0;
+            stroke-width: 1.0;
+            filter: drop-shadow(0 0 12px rgba(245, 235, 224, 0.3));
+            animation: floatGently 4s ease-in-out infinite alternate;
+        }
+
+        .krishna-feather {
+            width: clamp(80px, 14vw, 105px);
+            height: clamp(80px, 14vw, 105px);
+            fill: none;
+            stroke-width: 1.1;
+            animation: floatGently 4s ease-in-out infinite alternate-reverse;
+            filter: drop-shadow(0 0 18px rgba(138, 178, 209, 0.45));
+        }
+
+        .date-badge {
+            font-size: clamp(0.65rem, 2.2vw, 0.8rem);
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            color: #e8c580;
+            margin-bottom: 20px;
+            font-weight: 400;
+            z-index: 12;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+        }
+
+        .vanshika-title {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            font-size: clamp(1.7rem, 4.5vw, 2.4rem);
+            letter-spacing: 6px;
+            color: #ffffff;
+            line-height: 1.3;
+            text-transform: uppercase;
+            z-index: 5;
+        }
+
+        .vanshika-title span {
+            display: block;
+            font-family: 'Great Vibes', cursive;
+            text-transform: none;
+            font-size: clamp(3.8rem, 9.5vw, 5.2rem);
+            color: #fceade;
+            letter-spacing: 1px;
+            margin-top: 8px;
+            filter: drop-shadow(0 0 20px rgba(255,255,255,0.2));
+        }
+
+        /* STAGE 5: CENTRAL ARCHITECTURE ENGINE */
+        #screen-doi {
+            opacity: 0;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .finale-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 15;
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+        }
+
+        /* IDEAL PANDA POSITIONING: Centered and Proportional */
+        .panda-love-container {
+            width: clamp(130px, 28vw, 180px);
+            height: clamp(130px, 28vw, 180px);
+            margin-bottom: 25px;
+            filter: drop-shadow(0 10px 25px rgba(0,0,0,0.65));
+            animation: smoothFloatPanda 4.5s ease-in-out infinite alternate;
+        }
+
+        .finale-text-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+        }
+
+        .hbd-subtext {
+            font-size: clamp(0.7rem, 2.2vw, 0.85rem);
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 12px;
+            font-weight: 300;
+        }
+
+        .word-cute {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(4rem, 11vw, 5.8rem);
+            color: #ffffff;
+            font-weight: 400;
+            line-height: 0.9;
+            margin-bottom: 8px;
+            text-shadow: 0 0 30px rgba(255,255,255,0.35);
+            animation: lofiBreathe 4s ease-in-out infinite alternate;
+        }
+
+        .word-doi {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: clamp(2.2rem, 6.5vw, 3.5rem);
+            font-weight: 400;
+            letter-spacing: 2px;
+            color: #e8c580;
+            line-height: 1.1;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+            animation: lofiBreathe 4s ease-in-out infinite alternate-reverse;
+        }
+
+        /* SOFT AESTHETIC CELEBRATION BLAST & SPRINKLER EFFECT ENGINE */
+        .celebration-sprinkler-system {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0; left: 0;
+            pointer-events: none;
+            z-index: 5;
+            overflow: hidden;
+        }
+
+        .soft-blast-ring {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0.1);
+            border: 1px solid rgba(232, 197, 128, 0.45);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        .ring-1 { animation: gentleBlast 5s infinite ease-out; }
+        .ring-2 { animation: gentleBlast 5s infinite ease-out 1.8s; border-color: rgba(252, 234, 222, 0.3); }
+        .ring-3 { animation: gentleBlast 5s infinite ease-out 3.4s; border-color: rgba(255, 255, 255, 0.2); }
+
+        .sprinkler-particle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(232,197,128,0) 70%);
+            border-radius: 50%;
+            animation: softFloatSparkle 7s infinite linear;
+            opacity: 0;
+        }
+
+        .sp-1 { width: 5px; height: 5px; left: 20%; top: 80%; animation-delay: 0.5s; }
+        .sp-2 { width: 4px; height: 4px; left: 75%; top: 25%; animation-delay: 2s; }
+        .sp-3 { width: 6px; height: 6px; left: 45%; top: 15%; animation-delay: 4s; }
+        .sp-4 { width: 3px; height: 3px; left: 85%; top: 70%; animation-delay: 1.2s; }
+        .sp-5 { width: 5px; height: 5px; left: 15%; top: 30%; animation-delay: 3.5s; }
+
+        @keyframes gentleBlast {
+            0% { transform: translate(-50%, -50%) scale(0.2); opacity: 0; }
+            10% { opacity: 0.7; filter: blur(1px); }
+            60% { opacity: 0.3; }
+            100% { transform: translate(-50%, -50%) scale(1.6); opacity: 0; filter: blur(4px); }
+        }
+
+        @keyframes softFloatSparkle {
+            0% { transform: translateY(20px) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.8; }
+            80% { opacity: 0.8; }
+            100% { transform: translateY(-80px) rotate(45deg); opacity: 0; }
+        }
+
+        @keyframes smoothFloatPanda {
+            0% { transform: translateY(0) rotate(-2deg) scale(1); }
+            100% { transform: translateY(-8px) rotate(2deg) scale(1.02); }
+        }
+
+        @keyframes lofiBreathe {
+            0% { transform: scale(0.98); opacity: 0.9; }
+            100% { transform: scale(1.02); opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.08); opacity: 1; }
+        }
+
+        @keyframes floatGently {
+            0% { transform: translateY(0) rotate(-1deg); }
+            100% { transform: translateY(-10px) rotate(2deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- REFERENCE ASSET BACKGROUND CONTAINER -->
+    <div class="bg-container">
+        <div id="bg-tile-1" class="motion-bg active"></div>
+        <div id="bg-tile-2" class="motion-bg" style="background-image: url('1000078312.jpg');"></div>
+        <div id="bg-tile-3" class="motion-bg" style="background-image: url('1000078310.jpg');"></div>
+        <div id="bg-tile-4" class="motion-bg" style="background-image: url('1000078311.jpg');"></div>
+        <div id="bg-tile-5" class="motion-bg" style="background-image: url('1000078309.jpg');"></div>
+        <div class="ambient-overlay"></div>
+    </div>
+
+    <!-- STAGE 1: Entry Point -->
+    <div id="screen-trigger" class="screen" onclick="goToMishthi()">
+        <div class="heart-btn">🌹</div>
+        <div class="trigger-text">Tap to begin</div>
+    </div>
+
+    <!-- STAGE 2: Mishthi Presentation -->
+    <div id="screen-text" class="screen" onclick="goToLofiLandscape()">
+        <div class="hbd-title">Miss</div>
+        <div class="name-calligraphy">Mishthi</div>
+        <div class="tap-prompt">— Vanshika —</div>
+    </div>
+
+    <!-- STAGE 3: Self Love Aesthetic Statement -->
+    <div id="screen-photo" class="screen" onclick="goToVanshikaFinal()">
+        <div class="poetry-message">
+            Tumhaare is naye saal mein ek sukoon sa thehraav ho,<br>
+            Jo khwaab tum dekho, wo chupke se poore ho jayein.
+        </div>
+        <div class="final-message">You deserve the world... ✨</div>
+        <div class="tap-prompt">— Tap to unveil reality —</div>
+    </div>
+
+    <!-- STAGE 4: Vanshika Presentation Screen -->
+    <div id="screen-vanshika" class="screen" onclick="goToCuteMishthiDoi()">
+        <div class="warm-glow"></div>
+        <div class="date-badge">12th June</div>
+        
+        <div class="art-composition">
+            <svg class="aesthetic-cake" viewBox="0 0 24 24">
+                <path d="M4 21h16M5 13h14v8H5zm2-5h10v5H7zm4-5h2v5h-2z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="12" cy="2" r="0.5" fill="currentColor"/>
+                <path d="M8 13v8M12 13v8M16 13v8" stroke="currentColor" opacity="0.4"/>
+            </svg>
+            
+            <svg class="krishna-feather" viewBox="0 0 100 120">
+                <path d="M 50,110 C 45,85 25,60 30,35 C 33,20 45,15 50,22 C 55,15 67,20 70,35 C 75,60 55,85 50,110" stroke="#72efdd" stroke-width="1" opacity="0.45" stroke-dasharray="2,2"/>
+                <path d="M 50,100 C 40,80 20,60 25,40 C 28,25 45,20 50,30 C 55,20 72,25 75,40 C 80,60 60,80 50,100" stroke="#48cae4" stroke-width="1.2"/>
+                <path d="M 50,115 Q 49,70 50,15" stroke="#dfba73" stroke-width="2" stroke-linecap="round"/>
+                <path d="M 50,22 C 38,22 36,38 50,48 C 64,38 62,22 50,22 Z" stroke="#e2b670" stroke-width="1.5" fill="rgba(226, 182, 112, 0.1)"/>
+                <path d="M 50,26 C 42,26 40,36 50,44 C 60,36 58,26 50,26 Z" stroke="#00b4d8" stroke-width="1.5" fill="rgba(0, 180, 216, 0.15)"/>
+                <path d="M 50,30 C 45,30 44,36 50,40 C 56,36 55,30 50,30 Z" stroke="#03045e" stroke-width="1" fill="#03045e"/>
+                <path d="M50,90 Q32,75 30,62 M50,80 Q30,65 28,52 M50,70 Q31,53 32,42 M50,60 Q33,45 35,35" stroke="#48cae4" stroke-width="0.8" opacity="0.7"/>
+                <path d="M50,90 Q68,75 70,62 M50,80 Q70,65 72,52 M50,70 Q69,53 68,42 M50,60 Q67,45 65,35" stroke="#48cae4" stroke-width="0.8" opacity="0.7"/>
+            </svg>
+        </div>
+        
+        <h1 class="vanshika-title">
+            Happy Birthday 
+            <span>Vanshika</span>
+        </h1>
+        <div class="tap-prompt">— tap anywhere for final —</div>
+    </div>
+
+    <!-- STAGE 5: THE GRAND FINALE REMASTERED -->
+    <div id="screen-doi" class="screen">
+        <!-- Soft Aesthetic Celebration Blasting and Sprinkler Engine -->
+        <div class="celebration-sprinkler-system">
+            <div class="soft-blast-ring ring-1"></div>
+            <div class="soft-blast-ring ring-2"></div>
+            <div class="soft-blast-ring ring-3"></div>
+            <div class="sprinkler-particle sp-1"></div>
+            <div class="sprinkler-particle sp-2"></div>
+            <div class="sprinkler-particle sp-3"></div>
+            <div class="sprinkler-particle sp-4"></div>
+            <div class="sprinkler-particle sp-5"></div>
+        </div>
+
+        <!-- Central Structured Layout Module -->
+        <div class="finale-wrapper">
+            
+            <!-- Centered Vector Baby Panda -->
+            <div class="panda-love-container">
+                <svg viewBox="0 0 100 100" width="100%" height="100%">
+                    <!-- Ears -->
+                    <circle cx="28" cy="28" r="10" fill="#1e1a1c" />
+                    <circle cx="72" cy="28" r="10" fill="#1e1a1c" />
+                    <circle cx="28" cy="28" r="5" fill="#110d0f" />
+                    <circle cx="72" cy="28" r="5" fill="#110d0f" />
+                    <!-- Body Back -->
+                    <ellipse cx="50" cy="70" rx="26" ry="22" fill="#ffffff" stroke="#1e1a1c" stroke-width="1" />
+                    <!-- Head -->
+                    <circle cx="50" cy="46" r="25" fill="#ffffff" />
+                    <!-- Eye Patches (Romantic Love Tilt) -->
+                    <ellipse cx="38" cy="46" rx="7" ry="8.5" fill="#1e1a1c" transform="rotate(-15 38 46)" />
+                    <ellipse cx="62" cy="46" rx="7" ry="8.5" fill="#1e1a1c" transform="rotate(15 62 46)" />
+                    <!-- Sparkling Anime Eyes -->
+                    <circle cx="39" cy="45" r="2.5" fill="#ffffff" />
+                    <circle cx="61" cy="45" r="2.5" fill="#ffffff" />
+                    <circle cx="37.5" cy="47" r="1" fill="#ffffff" />
+                    <circle cx="62.5" cy="47" r="1" fill="#ffffff" />
+                    <!-- Cute Blushing Cheeks -->
+                    <circle cx="28" cy="52" r="3.5" fill="#ff9ebb" opacity="0.7" />
+                    <circle cx="72" cy="52" r="3.5" fill="#ff9ebb" opacity="0.7" />
+                    <!-- Tiny Nose & Smile -->
+                    <ellipse cx="50" cy="49" rx="2" ry="1.2" fill="#110d0f" />
+                    <path d="M 48,52 Q 50,54 52,52" stroke="#1e1a1c" stroke-width="1" fill="none" stroke-linecap="round" />
+                    <!-- Aesthetic Soft Pink Love Heart held by Panda -->
+                    <path d="M50,61 C45,55 35,57 35,66 C35,74 50,83 50,83 C50,83 65,74 65,66 C65,57 55,55 50,61 Z" fill="#ff4d6d" filter="drop-shadow(0 2px 5px rgba(255,77,109,0.4))" />
+                    <!-- Paws Rested on Heart -->
+                    <circle cx="36" cy="66" r="4.5" fill="#1e1a1c" />
+                    <circle cx="64" cy="66" r="4.5" fill="#1e1a1c" />
+                </svg>
+            </div>
+
+            <!-- Balanced Text Elements Perfectly Below the Image -->
+            <div class="finale-text-block">
+                <div class="hbd-subtext">Happy Birthday</div>
+                <span class="word-cute">Cute</span>
+                <span class="word-doi">Mishthi Doi</span>
+            </div>
+            
+        </div>
+    </div>
+
+    <script>
+        function switchBackground(tileNumber) {
+            document.querySelectorAll('.motion-bg').forEach(tile => {
+                tile.classList.remove('active');
+            });
+            document.getElementById('bg-tile-' + tileNumber).classList.add('active');
+        }
+
+        function goToMishthi() {
+            document.getElementById('screen-trigger').style.opacity = '0';
+            switchBackground(2);
+            
+            setTimeout(() => {
+                document.getElementById('screen-trigger').style.display = 'none';
+                const textScreen = document.getElementById('screen-text');
+                textScreen.style.display = 'flex';
+                
+                setTimeout(() => {
+                    textScreen.style.opacity = '1';
+                    textScreen.style.transform = 'translateY(0)';
+                    textScreen.style.pointerEvents = 'auto';
+                }, 100);
+            }, 1200);
+        }
+
+        function goToLofiLandscape() {
+            document.getElementById('screen-text').style.opacity = '0';
+            switchBackground(3);
+            
+            setTimeout(() => {
+                document.getElementById('screen-text').style.display = 'none';
+                const photoScreen = document.getElementById('screen-photo');
+                photoScreen.style.display = 'flex';
+                
+                setTimeout(() => {
+                    photoScreen.style.opacity = '1';
+                    photoScreen.style.pointerEvents = 'auto';
+                }, 100);
+            }, 1200);
+        }
+
+        function goToVanshikaFinal() {
+            document.getElementById('screen-photo').style.opacity = '0';
+            switchBackground(4);
+            
+            setTimeout(() => {
+                document.getElementById('screen-photo').style.display = 'none';
+                const vanshikaScreen = document.getElementById('screen-vanshika');
+                vanshikaScreen.style.display = 'flex';
+                
+                setTimeout(() => {
+                    vanshikaScreen.style.opacity = '1';
+                    vanshikaScreen.style.pointerEvents = 'auto';
+                }, 100);
+            }, 1200);
+        }
+
+        function goToCuteMishthiDoi() {
+            document.getElementById('screen-vanshika').style.opacity = '0';
+            switchBackground(5);
+            
+            setTimeout(() => {
+                document.getElementById('screen-vanshika').style.display = 'none';
+                const doiScreen = document.getElementById('screen-doi');
+                doiScreen.style.display = 'flex';
+                
+                setTimeout(() => {
+                    doiScreen.style.opacity = '1';
+                    doiScreen.style.transform = 'translateY(0)';
+                    doiScreen.style.pointerEvents = 'auto';
+                }, 100);
+            }, 1200);
+        }
+    </script>
+</body>
+</html>
